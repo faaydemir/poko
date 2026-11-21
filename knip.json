@@ -1,0 +1,14 @@
+{
+  "entry": [
+    "scripts/*.mjs",
+    "test/*.test.mjs"
+  ],
+  "project": [
+    "server/**/*.mjs",
+    "scripts/**/*.mjs",
+    "test/**/*.mjs"
+  ],
+  "ignoreBinaries": [
+    "codex"
+  ]
+}

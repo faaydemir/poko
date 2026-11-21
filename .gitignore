@@ -1,0 +1,19 @@
+node_modules/
+.build/
+dist/
+/server/listener-probe
+.DS_Store
+.gsd/
+
+.bg-shell/
+
+__pycache__/
+*.pyc
+
+# Private runtime state
+*.port-backup-*
+*.poko-backup-*
+registry.json
+connection.json
+agent-config.json
+*.log

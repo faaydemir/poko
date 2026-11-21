@@ -1,0 +1,17 @@
+name: quality
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+permissions:
+  contents: read
+jobs:
+  swift-dead-code:
+    runs-on: macos-14
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - run: brew install periphery
+      - run: bash scripts/swift-quality.sh

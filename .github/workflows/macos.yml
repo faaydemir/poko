@@ -1,0 +1,68 @@
+name: macOS binaries
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-14
+            arch: arm64
+          - runner: macos-15-intel
+            arch: x86_64
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22.22.0'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run lint
+      - run: npm run knip
+      - name: Validate release version
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: node -e 'if (process.env.RELEASE_TAG !== "v" + require("./package.json").version) process.exit(1)'
+      - run: npm run package
+      - uses: actions/upload-artifact@v7
+        with:
+          name: Poko-macos-${{ matrix.arch }}
+          path: |
+            dist/Poko-*.zip
+            dist/Poko-*.sha256
+          if-no-files-found: error
+          retention-days: 14
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: Poko-macos-*
+          merge-multiple: true
+          path: artifacts
+      - name: Publish release with both installers
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          gh release create "$RELEASE_TAG" artifacts/*.zip artifacts/*.sha256 --verify-tag --title "Poko $RELEASE_TAG" --notes "Install: \`curl -fsSL https://raw.githubusercontent.com/${GH_REPO}/main/install.sh | bash\`. Or download the ZIP for your Mac (arm64 = Apple Silicon, x86_64 = Intel), extract it and open Poko Installer.app. Includes Node; no npm install required. Ad-hoc signed, not Apple-notarized."

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <g transform="translate(512 512) scale(0.8583) translate(-512 -512)">
+  <!-- Background squircle -->
+  <rect x="32" y="32" width="960" height="960" rx="220" ry="220" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="14"/>
+
+  <!-- Dotted mapping connections -->
+  <!-- Line 1: Straight (L1 -> R1, Orange) -->
+  <g id="line1-dots" fill="#F06112">
+    <circle cx="388.0" cy="280.0" r="24"/>
+    <circle cx="450.0" cy="280.0" r="24"/>
+    <circle cx="512.0" cy="280.0" r="24"/>
+    <circle cx="574.0" cy="280.0" r="24"/>
+    <circle cx="636.0" cy="280.0" r="24"/>
+  </g>
+
+  <!-- Line 2: Cross (L2 -> R3, Dark Green) -->
+  <g id="line2-dots" fill="#147038">
+    <circle cx="376.3" cy="565.5" r="24"/>
+    <circle cx="444.1" cy="596.8" r="24"/>
+    <circle cx="512.0" cy="628.0" r="24"/>
+    <circle cx="579.9" cy="659.2" r="24"/>
+    <circle cx="647.7" cy="690.5" r="24"/>
+  </g>
+
+  <!-- Line 3: Cross (L3 -> R2, Dark Blue) -->
+  <g id="line3-dots" fill="#1C52C7">
+    <circle cx="376.3" cy="690.5" r="24"/>
+    <circle cx="444.1" cy="659.2" r="24"/>
+    <circle cx="512.0" cy="628.0" r="24"/>
+    <circle cx="579.9" cy="596.8" r="24"/>
+    <circle cx="647.7" cy="565.5" r="24"/>
+  </g>
+
+  <!-- Left column dots (Source ports: Colored) -->
+  <circle cx="260" cy="280" r="92" fill="#F06112" id="dot-left-1"/>
+  <circle cx="260" cy="512" r="92" fill="#147038" id="dot-left-2"/>
+  <circle cx="260" cy="744" r="92" fill="#1C52C7" id="dot-left-3"/>
+
+  <!-- Right column dots (Target ports: Gray) -->
+  <circle cx="764" cy="280" r="92" fill="#94A3B8" id="dot-right-1"/>
+  <circle cx="764" cy="512" r="92" fill="#94A3B8" id="dot-right-2"/>
+  <circle cx="764" cy="744" r="92" fill="#94A3B8" id="dot-right-3"/>
+  </g>
+</svg>

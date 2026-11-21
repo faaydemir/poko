@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:port}",
+            "name": "Debug PortUI",
+            "target": "PortUI",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug PortUI"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:port}",
+            "name": "Release PortUI",
+            "target": "PortUI",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release PortUI"
+        }
+    ]
+}
